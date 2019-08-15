@@ -229,3 +229,27 @@ SELECT client.client_name FROM client WHERE client.branch_id = (
     SELECT branch.branch_id FROM branch WHERE branch.mgr_id = 102 LIMIT 1
 );
 
+/* ON DELETE set null -> will set values to null or cascade -> will delete associate columns
+Primary keys cannot be a null value which is when we use ON DELETE CASCADE*/
+
+/* DELIMITER is a special phrase in MySQL */
+
+DELIMITER $$
+CREATE
+    TRIGGER my_trigger BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES ('added new emplpoyee');
+    END$$
+DELIMITER ;
+
+/*     ER DIAGRAMS    
+
+Help create database schema through visualization. 
+A weak entity is an entity that cannot exsit without another entity. They only exist in the context of, or relative to another entity.  
+
+Database creation could include taking a broad management level written or verbal discription of a business followed by the creation of ER diagram to help visualize the proposed database layout. 
+*/
+
+/*  
+
